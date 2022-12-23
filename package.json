@@ -1,0 +1,27 @@
+{
+  "name": "raspi_car",
+  "version": "1.0.0",
+  "description": "树莓派-远程小车",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ddd702/raspi_car.git"
+  },
+  "author": "ddd",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ddd702/raspi_car/issues"
+  },
+  "homepage": "https://github.com/ddd702/raspi_car#readme",
+  "dependencies": {
+    "aspi-pwm": "^6.0.1",
+    "crypto-js": "^4.1.1",
+    "fs-extra": "^11.1.0",
+    "mqtt": "^4.3.7",
+    "raspi": "^6.0.1",
+    "raspi-gpio": "^6.2.2"
+  }
+}

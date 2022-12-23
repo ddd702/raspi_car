@@ -1,0 +1,8 @@
+{
+  "PRODUCT_ID":"",
+  "DEVICE_NAME":"",
+  "DEVICE_KEY":"",
+  "SDK_APPID":"",
+  "MQTT_URL":"mqtt://*",
+  "MQTT_PORT":"1883"
+}
