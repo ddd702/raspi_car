@@ -30,8 +30,7 @@ mqttClient.on('connect', () => {
   );
 });
 mqttClient.on('message', function (topic, message) {
-  //要小车发回信息才能操作
-  // message is Buffer
+  //小车控制端发来的消息
   console.log(topic, message.toString());
 });
 mqttClient.on('close', () => {
