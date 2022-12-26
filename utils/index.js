@@ -3,6 +3,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const crypto = require('crypto-js');
 
+
 function  randStr(num = 8) { //获取随机字符
   function randomString(length, chars) {
     let result = '';
@@ -47,5 +48,5 @@ function getMqttConf (){
 module.exports ={
   randStr,
   getIp,
-  getMqttConf
+  getMqttConf,
 }

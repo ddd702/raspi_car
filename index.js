@@ -1,5 +1,6 @@
 const Utils = require('./utils');
 const mqtt = require('mqtt');
+const { exec } = require('child_process');
 // const raspi = require('raspi');
 // const gpio = require('raspi-gpio');
 
@@ -13,6 +14,7 @@ const mqttOpt = {
   password
 };
 const mqttClient = mqtt.connect(MQTT_URL, mqttOpt);
+
 mqttClient.on('connect', () => {
   console.warn('mqtt 已连接');
   isConnected=true;
@@ -31,7 +33,19 @@ mqttClient.on('connect', () => {
 });
 mqttClient.on('message', function (topic, message) {
   //小车控制端发来的消息
-  console.log(topic, message.toString());
+  
+  const msgObj = JSON.parse(message.toString());
+  console.log(topic, msgObj);
+  const op = msgObj.op||'';
+  if(op ==='sound'){//喇叭
+    exec('play /home/ddd/Desktop/smb/car_laba.mp3', (error, stdout) => {
+      if (error) {
+        console.error('error:', error.message);
+        return;
+      }
+      console.log('stdout: ' + stdout);
+    })
+  }
 });
 mqttClient.on('close', () => {
   isConnected = false;
