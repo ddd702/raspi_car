@@ -2,7 +2,7 @@ const Utils = require('./utils');
 const mqtt = require('mqtt');
 const { exec } = require('child_process');
 // const raspi = require('raspi');
-// const gpio = require('raspi-gpio');
+const Gpio = require('pigpio').Gpio;
 
 let isConnected = false; //是否连接mqtt
 const {PRODUCT_ID,DEVICE_NAME,MQTT_URL,clientId,MQTT_PORT,username,password} = Utils.getMqttConf()
@@ -14,6 +14,8 @@ const mqttOpt = {
   password
 };
 const mqttClient = mqtt.connect(MQTT_URL, mqttOpt);
+
+const led = new Gpio(16, {mode:Gpio.OUTPUT});//led用16接口
 
 mqttClient.on('connect', () => {
   console.warn('mqtt 已连接');
@@ -45,6 +47,11 @@ mqttClient.on('message', function (topic, message) {
       }
       console.log('stdout: ' + stdout);
     })
+  }
+  if (/^light/.test(op)) {
+    const sign = Number(op.split(':')[1]);
+    led.digitalWrite(sign)
+    console.log('led is ',sign);
   }
 });
 mqttClient.on('close', () => {
