@@ -19,7 +19,15 @@ const led = new Gpio(16, {mode:Gpio.OUTPUT});//led用16接口
 
 mqttClient.on('connect', () => {
   console.warn('mqtt 已连接');
+  console.warn('led',led)
   isConnected=true;
+  exec('play /home/ddd/Desktop/smb/ok.mp3', (error, stdout) => {
+    if (error) {
+      console.error('error:', error.message);
+      return;
+    }
+    console.log('has paly video: ' + stdout);
+  })
   sendCli(`from ${Utils.getIp()}`)
   mqttClient.subscribe(
     `${PRODUCT_ID}/${DEVICE_NAME}/control`,
