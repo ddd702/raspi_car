@@ -28,7 +28,6 @@ mqttClient.on('connect', () => {
     }
     console.log('has paly video: ' + stdout);
   })
-  sendCli(`from ${Utils.getIp()}`)
   mqttClient.subscribe(
     `${PRODUCT_ID}/${DEVICE_NAME}/control`,
     { qos: 0 },
@@ -47,6 +46,9 @@ mqttClient.on('message', function (topic, message) {
   const msgObj = JSON.parse(message.toString());
   console.log(topic, msgObj);
   const op = msgObj.op||'';
+  if(op ==='ready'){//控制端发送的指令
+    sendCli(`ip:${Utils.getIp()}`)
+  }
   if(op ==='sound'){//喇叭
     exec('play /home/ddd/Desktop/smb/car_laba.mp3', (error, stdout) => {
       if (error) {
